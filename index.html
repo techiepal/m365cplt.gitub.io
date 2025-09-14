@@ -1,0 +1,917 @@
+
+                        <!DOCTYPE html>
+                        <html lang="en">
+                        <head>
+                            <meta charset="UTF-8">
+                            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+              <style>
+                body {
+                  background-color: white; /* Ensure the iframe has a white background */
+                }
+    
+                
+              </style>
+                        </head>
+                        <body>
+                            <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instructional Design Document - Microsoft 365 Copilot</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .gradient-text {
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .card-shadow {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        
+        .progress-bar {
+            height: 8px;
+            border-radius: 4px;
+            background-color: #e5e7eb;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        
+        .scene-card {
+            transition: all 0.3s ease;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid #e5e7eb;
+            transform: scale(1);
+        }
+        
+        .scene-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .scene-card.active {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+        
+        .scene-number {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: #3b82f6;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        
+        .section-header {
+            position: relative;
+            padding-bottom: 12px;
+        }
+        
+        .section-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .floating {
+            animation: float 3s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-slate-50 to-blue-50 min-h-screen">
+    <!-- Header -->
+    <header class="bg-gradient-to-r from-blue-600 to-purple-700 text-white shadow-lg relative overflow-hidden">
+        <div class="absolute inset-0 opacity-20">
+            <div class="absolute top-1/4 left-1/4 w-32 h-32 bg-white rounded-full filter blur-xl"></div>
+            <div class="absolute bottom-1/4 right-1/4 w-48 h-48 bg-blue-300 rounded-full filter blur-xl"></div>
+        </div>
+        <div class="container mx-auto px-6 py-8 relative z-10">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-6">
+                    <div class="w-16 h-16 bg-white bg-opacity-20 rounded-xl flex items-center justify-center">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                        </svg>
+                    </div>
+                    <div>
+                        <h1 class="text-3xl font-bold mb-1">Microsoft 365 Copilot</h1>
+                        <p class="text-blue-100 text-lg">Instructional Design Document</p>
+                    </div>
+                </div>
+                <div class="text-right">
+                    <p class="text-blue-100 text-sm">Version 1.0</p>
+                    <p class="text-blue-100 text-sm">Last Updated: December 2024</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="bg-white shadow-md sticky top-0 z-10">
+        <div class="container mx-auto px-6">
+            <div class="flex overflow-x-auto space-x-8 py-4">
+                <a href="#overview" class="text-blue-600 font-medium whitespace-nowrap hover:text-blue-800 transition-colors">Overview</a>
+                <a href="#objectives" class="text-gray-600 hover:text-blue-600 font-medium whitespace-nowrap transition-colors">Learning Objectives</a>
+                <a href="#storyboard" class="text-gray-600 hover:text-blue-600 font-medium whitespace-nowrap transition-colors">Storyboard</a>
+                <a href="#engagement" class="text-gray-600 hover:text-blue-600 font-medium whitespace-nowrap transition-colors">Engagement Strategy</a>
+                <a href="#production" class="text-gray-600 hover:text-blue-600 font-medium whitespace-nowrap transition-colors">Production Notes</a>
+                <a href="#validation" class="text-gray-600 hover:text-blue-600 font-medium whitespace-nowrap transition-colors">Validation Process</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container mx-auto px-6 py-12">
+        <!-- Project Overview -->
+        <section id="overview" class="mb-16">
+            <div class="bg-white rounded-2xl shadow-xl p-8 mb-8 card-shadow">
+                <div class="flex items-center mb-6">
+                    <i class="fas fa-file-alt text-blue-600 text-2xl mr-3"></i>
+                    <h2 class="text-2xl font-bold text-gray-800">Project Overview</h2>
+                </div>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-700 mb-3">Project Title</h3>
+                            <p class="text-gray-600 mb-6 bg-blue-50 p-4 rounded-lg">Microsoft 365 Copilot: Enterprise-ready web chat</p>
+                        </div>
+                        
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-700 mb-3">Target Audience</h3>
+                            <ul class="text-gray-600 space-y-3">
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                    Business professionals and managers
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                    IT administrators and decision makers
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                    Teams seeking productivity enhancement
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-700 mb-3">Content Source</h3>
+                            <p class="text-gray-600 mb-6 bg-purple-50 p-4 rounded-lg">Raw script and footage provided by Microsoft 365 product team</p>
+                        </div>
+                        
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-700 mb-3">Delivery Format</h3>
+                            <p class="text-gray-600 mb-6 bg-indigo-50 p-4 rounded-lg">Interactive video tutorial with embedded engagement markers</p>
+                        </div>
+                        
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-700 mb-3">Duration</h3>
+                            <p class="text-gray-600 bg-gray-50 p-4 rounded-lg">Approximately 4-5 minutes</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Learning Objectives -->
+        <section id="objectives" class="mb-16">
+            <div class="bg-white rounded-2xl shadow-xl p-8 card-shadow">
+                <div class="flex items-center mb-6">
+                    <i class="fas fa-bullseye text-blue-600 text-2xl mr-3"></i>
+                    <h2 class="text-2xl font-bold text-gray-800">Learning Objectives</h2>
+                </div>
+                
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="border-l-4 border-blue-500 pl-6 py-2">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-4">Primary Objectives</h3>
+                        <ul class="mt-3 space-y-4">
+                            <li class="flex items-start">
+                                <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center mr-3 mt-0.5 flex-shrink-0">
+                                    <span class="text-blue-600 text-xs font-bold">1</span>
+                                </div>
+                                <div>
+                                    <p class="font-medium text-gray-800">Understand the core capabilities and value proposition of Microsoft 365 Copilot</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center mr-3 mt-0.5 flex-shrink-0">
+                                    <span class="text-blue-600 text-xs font-bold">2</span>
+                                </div>
+                                <div>
+                                    <p class="font-medium text-gray-800">Navigate the Copilot interface and identify key components</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center mr-3 mt-0.5 flex-shrink-0">
+                                    <span class="text-blue-600 text-xs font-bold">3</span>
+                                </div>
+                                <div>
+                                    <p class="font-medium text-gray-800">Use natural language to interact with Copilot effectively</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center mr-3 mt-0.5 flex-shrink-0">
+                                    <span class="text-blue-600 text-xs font-bold">4</span>
+                                </div>
+                                <div>
+                                    <p class="font-medium text-gray-800">Upload and analyze data using Copilot's visualization tools</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="border-l-4 border-green-500 pl-6 py-2">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-4">Secondary Objectives</h3>
+                        <ul class="mt-3 space-y-4">
+                            <li class="flex items-start">
+                                <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center mr-3 mt-0.5 flex-shrink-0">
+                                    <span class="text-green-600 text-xs font-bold">A</span>
+                                </div>
+                                <div>
+                                    <p class="font-medium text-gray-800">Interpret data trends and apply strategic recommendations</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center mr-3 mt-0.5 flex-shrink-0">
+                                    <span class="text-green-600 text-xs font-bold">B</span>
+                                </div>
+                                <div>
+                                    <p class="font-medium text-gray-800">Understand how Copilot integrates with other Microsoft 365 services</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center mr-3 mt-0.5 flex-shrink-0">
+                                    <span class="text-green-600 text-xs font-bold">C</span>
+                                </div>
+                                <div>
+                                    <p class="font-medium text-gray-800">Summarize the key benefits of using Microsoft 365 Copilot</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Storyboard -->
+        <section id="storyboard" class="mb-16">
+            <div class="bg-white rounded-2xl shadow-xl p-8 card-shadow">
+                <div class="flex items-center mb-6">
+                    <i class="fas fa-film text-blue-600 text-2xl mr-3"></i>
+                    <h2 class="text-2xl font-bold text-gray-800">Storyboard Outline</h2>
+                </div>
+                
+                <div class="space-y-6">
+                    <!-- Scene 1 -->
+                    <div class="scene-card relative group">
+                        <div class="w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center font-bold mr-4 absolute top-4 right-4 scene-number">1</div>
+                        <div class="p-6">
+                            <div class="flex items-start mb-4">
+                                <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                                    <i class="fas fa-play text-blue-600 text-xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-semibold text-gray-800">Introduction to Microsoft 365 Copilot</h3>
+                                    <p class="text-gray-600">Enterprise-ready web chat that transforms how you work with AI</p>
+                                </div>
+                            </div>
+                            
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div class="bg-blue-50 p-4 rounded-lg">
+                                    <h4 class="font-semibold text-gray-700 mb-2 flex items-center">
+                                        <i class="fas fa-microphone-alt text-blue-500 mr-2"></i>
+                                        Narration
+                                    </h4>
+                                    <p class="text-gray-600">Welcome to Microsoft 365 Copilot, the enterprise-ready web chat that revolutionizes productivity through intelligent AI assistance.</p>
+                                </div>
+                                
+                                <div class="bg-purple-50 p-4 rounded-lg">
+                                    <h4 class="font-semibold text-gray-700 mb-2 flex items-center">
+                                        <i class="fas fa-eye text-purple-500 mr-2"></i>
+                                        Visual Cue
+                                    </h4>
+                                    <p class="text-gray-600">Show Copilot interface with animated elements highlighting key features</p>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-4 bg-green-50 p-4 rounded-lg">
+                                <h4 class="font-semibold text-gray-700 mb-2 flex items-center">
+                                    <i class="fas fa-graduation-cap text-green-500 mr-2"></i>
+                                    Expected Learner Outcome
+                                </h4>
+                                <p class="text-gray-600">Understand what Microsoft 365 Copilot is and its core capabilities</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Scene 2 -->
+                    <div class="scene-card relative group">
+                        <div class="w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center font-bold mr-4 absolute top-4 right-4 scene-number">2</div>
+                        <div class="p-6">
+                            <div class="flex items-start mb-4">
+                                <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                                    <i class="fas fa-play text-blue-600 text-xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-semibold text-gray-800">Interactive Interface</h3>
+                                    <p class="text-gray-600">Clean, intuitive interface designed for seamless collaboration</p>
+                                </div>
+                            </div>
+                            
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div class="bg-blue-50 p-4 rounded-lg">
+                                    <h4 class="font-semibold text-gray-700 mb-2 flex items-center">
+                                        <i class="fas fa-microphone-alt text-blue-500 mr-2"></i>
+                                        Narration
+                                    </h4>
+                                    <p class="text-gray-600">The Copilot interface features a clean dashboard with quick access to common tasks and agents. The sidebar provides easy navigation between different functions.</p>
+                                </div>
+                                
+                                <div class="bg-purple-50 p-4 rounded-lg">
+                                    <h4 class="font-semibold text-gray-700 mb-2 flex items-center">
+                                        <i class="fas fa-eye text-purple-500 mr-2"></i>
+                                        Visual Cue
+                                    </h4>
+                                    <p class="text-gray-600">Demonstrate navigation through the interface with callouts for key elements</p>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-4 bg-green-50 p-4 rounded-lg">
+                                <h4 class="font-semibold text-gray-700 mb-2 flex items-center">
+                                    <i class="fas fa-graduation-cap text-green-500 mr-2"></i>
+                                    Expected Learner Outcome
+                                </h4>
+                                <p class="text-gray-600">Navigate the Copilot interface and identify key components</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Scene 3 -->
+                    <div class="scene-card relative group">
+                        <div class="w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center font-bold mr-4 absolute top-4 right-4 scene-number">3</div>
+                        <div class="p-6">
+                            <div class="flex items-start mb-4">
+                                <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                                    <i class="fas fa-play text-blue-600 text-xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-semibold text-gray-800">Natural Language Processing</h3>
+                                    <p class="text-gray-600">Ask questions in plain language and get meaningful responses</p>
+                                </div>
+                            </div>
+                            
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div class="bg-blue-50 p-4 rounded-lg">
+                                    <h4 class="font-semibold text-gray-700 mb-2 flex items-center">
+                                        <i class="fas fa-microphone-alt text-blue-500 mr-2"></i>
+                                        Narration
+                                    </h4>
+                                    <p class="text-gray-600">Simply type your questions in natural language. Copilot understands complex queries and provides relevant information.</p>
+                                </div>
+                                
+                                <div class="bg-purple-50 p-4 rounded-lg">
+                                    <h4 class="font-semibold text-gray-700 mb-2 flex items-center">
+                                        <i class="fas fa-eye text-purple-500 mr-2"></i>
+                                        Visual Cue
+                                    </h4>
+                                    <p class="text-gray-600">Show text input field with sample queries and Copilot's intelligent responses</p>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-4 bg-green-50 p-4 rounded-lg">
+                                <h4 class="font-semibold text-gray-700 mb-2 flex items-center">
+                                    <i class="fas fa-graduation-cap text-green-500 mr-2"></i>
+                                    Expected Learner Outcome
+                                </h4>
+                                <p class="text-gray-600">Use natural language to interact with Copilot effectively</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Scene 4 -->
+                    <div class="scene-card relative group">
+                        <div class="w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center font-bold mr-4 absolute top-4 right-4 scene-number">4</div>
+                        <div class="p-6">
+                            <div class="flex items-start mb-4">
+                                <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                                    <i class="fas fa-play text-blue-600 text-xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-semibold text-gray-800">Data Analysis & Visualization</h3>
+                                    <p class="text-gray-600">Transform raw data into actionable insights with powerful analytics</p>
+                                </div>
+                            </div>
+                            
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div class="bg-blue-50 p-4 rounded-lg">
+                                    <h4 class="font-semibold text-gray-700 mb-2 flex items-center">
+                                        <i class="fas fa-microphone-alt text-blue-500 mr-2"></i>
+                                        Narration
+                                    </h4>
+                                    <p class="text-gray-600">Upload your data files and let Copilot create professional visualizations. From tables to charts, Copilot makes data analysis simple.</p>
+                                </div>
+                                
+                                <div class="bg-purple-50 p-4 rounded-lg">
+                                    <h4 class="font-semibold text-gray-700 mb-2 flex items-center">
+                                        <i class="fas fa-eye text-purple-500 mr-2"></i>
+                                        Visual Cue
+                                    </h4>
+                                    <p class="text-gray-600">Display data upload process and transformation into visual charts</p>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-4 bg-green-50 p-4 rounded-lg">
+                                <h4 class="font-semibold text-gray-700 mb-2 flex items-center">
+                                    <i class="fas fa-graduation-cap text-green-500 mr-2"></i>
+                                    Expected Learner Outcome
+                                </h4>
+                                <p class="text-gray-600">Upload and analyze data using Copilot's visualization tools</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Scene 5 -->
+                    <div class="scene-card relative group">
+                        <div class="w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center font-bold mr-4 absolute top-4 right-4 scene-number">5</div>
+                        <div class="p-6">
+                            <div class="flex items-start mb-4">
+                                <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                                    <i class="fas fa-play text-blue-600 text-xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-semibold text-gray-800">Strategic Insights</h3>
+                                    <p class="text-gray-600">Get expert recommendations based on your data trends</p>
+                                </div>
+                            </div>
+                            
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div class="bg-blue-50 p-4 rounded-lg">
+                                    <h4 class="font-semibold text-gray-700 mb-2 flex items-center">
+                                        <i class="fas fa-microphone-alt text-blue-500 mr-2"></i>
+                                        Narration
+                                    </h4>
+                                    <p class="text-gray-600">Beyond just data presentation, Copilot provides strategic recommendations based on trend analysis and market insights.</p>
+                                </div>
+                                
+                                <div class="bg-purple-50 p-4 rounded-lg">
+                                    <h4 class="font-semibold text-gray-700 mb-2 flex items-center">
+                                        <i class="fas fa-eye text-purple-500 mr-2"></i>
+                                        Visual Cue
+                                    </h4>
+                                    <p class="text-gray-600">Show insights dashboard with actionable recommendations</p>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-4 bg-green-50 p-4 rounded-lg">
+                                <h4 class="font-semibold text-gray-700 mb-2 flex items-center">
+                                    <i class="fas fa-graduation-cap text-green-500 mr-2"></i>
+                                    Expected Learner Outcome
+                                </h4>
+                                <p class="text-gray-600">Interpret data trends and apply strategic recommendations</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Scene 6 -->
+                    <div class="scene-card relative group">
+                        <div class="w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center font-bold mr-4 absolute top-4 right-4 scene-number">6</div>
+                        <div class="p-6">
+                            <div class="flex items-start mb-4">
+                                <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                                    <i class="fas fa-play text-blue-600 text-xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-semibold text-gray-800">Seamless Integration</h3>
+                                    <p class="text-gray-600">Connect with your existing Microsoft 365 ecosystem</p>
+                                </div>
+                            </div>
+                            
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div class="bg-blue-50 p-4 rounded-lg">
+                                    <h4 class="font-semibold text-gray-700 mb-2 flex items-center">
+                                        <i class="fas fa-microphone-alt text-blue-500 mr-2"></i>
+                                        Narration
+                                    </h4>
+                                    <p class="text-gray-600">Copilot integrates seamlessly with your existing Microsoft 365 applications, ensuring all your work stays connected and accessible.</p>
+                                </div>
+                                
+                                <div class="bg-purple-50 p-4 rounded-lg">
+                                    <h4 class="font-semibold text-gray-700 mb-2 flex items-center">
+                                        <i class="fas fa-eye text-purple-500 mr-2"></i>
+                                        Visual Cue
+                                    </h4>
+                                    <p class="text-gray-600">Illustrate integration points with Outlook, Teams, Excel, and other M365 apps</p>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-4 bg-green-50 p-4 rounded-lg">
+                                <h4 class="font-semibold text-gray-700 mb-2 flex items-center">
+                                    <i class="fas fa-graduation-cap text-green-500 mr-2"></i>
+                                    Expected Learner Outcome
+                                </h4>
+                                <p class="text-gray-600">Understand how Copilot integrates with other Microsoft 365 services</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Scene 7 -->
+                    <div class="scene-card relative group">
+                        <div class="w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center font-bold mr-4 absolute top-4 right-4 scene-number">7</div>
+                        <div class="p-6">
+                            <div class="flex items-start mb-4">
+                                <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                                    <i class="fas fa-play text-blue-600 text-xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-semibold text-gray-800">Conclusion</h3>
+                                    <p class="text-gray-600">Empower your team with intelligent AI assistance</p>
+                                </div>
+                            </div>
+                            
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div class="bg-blue-50 p-4 rounded-lg">
+                                    <h4 class="font-semibold text-gray-700 mb-2 flex items-center">
+                                        <i class="fas fa-microphone-alt text-blue-500 mr-2"></i>
+                                        Narration
+                                    </h4>
+                                    <p class="text-gray-600">Microsoft 365 Copilot transforms how teams work together, making knowledge accessible, insights actionable, and collaboration more effective than ever before.</p>
+                                </div>
+                                
+                                <div class="bg-purple-50 p-4 rounded-lg">
+                                    <h4 class="font-semibold text-gray-700 mb-2 flex items-center">
+                                        <i class="fas fa-eye text-purple-500 mr-2"></i>
+                                        Visual Cue
+                                    </h4>
+                                    <p class="text-gray-600">Show team collaboration scenarios with Copilot assistance</p>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-4 bg-green-50 p-4 rounded-lg">
+                                <h4 class="font-semibold text-gray-700 mb-2 flex items-center">
+                                    <i class="fas fa-graduation-cap text-green-500 mr-2"></i>
+                                    Expected Learner Outcome
+                                </h4>
+                                <p class="text-gray-600">Summarize the key benefits of using Microsoft 365 Copilot</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Engagement Strategy -->
+        <section id="engagement" class="mb-16">
+            <div class="bg-white rounded-2xl shadow-xl p-8 card-shadow">
+                <div class="flex items-center mb-6">
+                    <i class="fas fa-hand-point-up text-blue-600 text-2xl mr-3"></i>
+                    <h2 class="text-2xl font-bold text-gray-800">Engagement Strategy</h2>
+                </div>
+                
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl p-6 floating">
+                        <div class="w-14 h-14 bg-blue-500 text-white rounded-full flex items-center justify-center mb-4">
+                            <i class="fas fa-bolt text-xl"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold text-gray-800 mb-3">Opening Hook</h3>
+                        <p class="text-gray-700 mb-4">"How would you like to transform your workflow?"</p>
+                        <p class="text-sm text-gray-600">Scene 1: Capture attention by posing a relatable question that introduces the transformative potential of Copilot</p>
+                    </div>
+                    
+                    <div class="bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl p-6 floating">
+                        <div class="w-14 h-14 bg-purple-500 text-white rounded-full flex items-center justify-center mb-4">
+                            <i class="fas fa-sync-alt text-xl"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold text-gray-800 mb-3">Recap Prompts</h3>
+                        <ul class="text-gray-700 space-y-2 mb-4">
+                            <li class="text-sm">"What are the three main sections of the Copilot interface?"</li>
+                            <li class="text-sm">"What types of data visualizations can Copilot create?"</li>
+                            <li class="text-sm">"How does Copilot enhance your existing Microsoft 365 workflow?"</li>
+                        </ul>
+                        <p class="text-sm text-gray-600">Scenes 2, 4, and 6: Reinforce learning by asking viewers to recall key information</p>
+                    </div>
+                    
+                    <div class="bg-gradient-to-br from-green-50 to-green-100 rounded-xl p-6 floating">
+                        <div class="w-14 h-14 bg-green-500 text-white rounded-full flex items-center justify-center mb-4">
+                            <i class="fas fa-arrow-right text-xl"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold text-gray-800 mb-3">Call-to-Actions</h3>
+                        <ul class="text-gray-700 space-y-2 mb-4">
+                            <li class="text-sm">"Try asking Copilot about your most pressing business question"</li>
+                            <li class="text-sm">"Ask Copilot for growth strategies based on your sales data"</li>
+                            <li class="text-sm">"Start your journey with Copilot today and experience the future of intelligent work"</li>
+                        </ul>
+                        <p class="text-sm text-gray-600">Scenes 3, 5, and 7: Encourage immediate application of learned concepts</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Production Notes -->
+        <section id="production" class="mb-16">
+            <div class="bg-white rounded-2xl shadow-xl p-8 card-shadow">
+                <div class="flex items-center mb-6">
+                    <i class="fas fa-video text-blue-600 text-2xl mr-3"></i>
+                    <h2 class="text-2xl font-bold text-gray-800">Production Notes</h2>
+                </div>
+                
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-lg font-semibold text-gray-700 mb-4 flex items-center">
+                            <i class="fas fa-paint-brush text-purple-500 mr-2"></i>
+                            Graphics & Animations
+                        </h3>
+                        <ul class="space-y-3">
+                            <li class="flex items-start bg-purple-50 p-3 rounded-lg">
+                                <i class="fas fa-circle text-purple-400 text-xs mt-2 mr-3"></i>
+                                <div>
+                                    <p class="font-medium text-gray-800">Animated transitions between scenes</p>
+                                    <p class="text-sm text-gray-600">Smooth fade and slide transitions to maintain viewer engagement</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start bg-purple-50 p-3 rounded-lg">
+                                <i class="fas fa-circle text-purple-400 text-xs mt-2 mr-3"></i>
+                                <div>
+                                    <p class="font-medium text-gray-800">Data visualization animations</p>
+                                    <p class="text-sm text-gray-600">Dynamic chart creation and data transformation effects</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start bg-purple-50 p-3 rounded-lg">
+                                <i class="fas fa-circle text-purple-400 text-xs mt-2 mr-3"></i>
+                                <div>
+                                    <p class="font-medium text-gray-800">Interface highlighting</p>
+                                    <p class="text-sm text-gray-600">Pulsing effects to draw attention to key UI elements</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-lg font-semibold text-gray-700 mb-4 flex items-center">
+                            <i class="fas fa-cogs text-blue-500 mr-2"></i>
+                            Technical Requirements
+                        </h3>
+                        <ul class="space-y-3">
+                            <li class="flex items-start bg-blue-50 p-3 rounded-lg">
+                                <i class="fas fa-circle text-blue-400 text-xs mt-2 mr-3"></i>
+                                <div>
+                                    <p class="font-medium text-gray-800">1080p resolution</p>
+                                    <p class="text-sm text-gray-600">High-definition video for professional presentation</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start bg-blue-50 p-3 rounded-lg">
+                                <i class="fas fa-circle text-blue-400 text-xs mt-2 mr-3"></i>
+                                <div>
+                                    <p class="font-medium text-gray-800">4:3 aspect ratio</p>
+                                    <p class="text-sm text-gray-600">Optimized for presentation and e-learning platforms</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start bg-blue-50 p-3 rounded-lg">
+                                <i class="fas fa-circle text-blue-400 text-xs mt-2 mr-3"></i>
+                                <div>
+                                    <p class="font-medium text-gray-800">Subtitles and captions</p>
+                                    <p class="text-sm text-gray-600">Accessibility compliance for all viewers</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="mt-8">
+                    <h3 class="text-lg font-semibold text-gray-700 mb-4 flex items-center">
+                        <i class="fas fa-clipboard-check text-green-500 mr-2"></i>
+                        Quality Assurance Checklist
+                    </h3>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div class="space-y-2">
+                            <div class="flex items-center">
+                                <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                                <span class="text-gray-700">Verify all learning objectives are addressed</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                                <span class="text-gray-700">Ensure engagement markers are included</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                                <span class="text-gray-700">Confirm visual cues match narration</span>
+                            </div>
+                        </div>
+                        <div class="space-y-2">
+                            <div class="flex items-center">
+                                <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                                <span class="text-gray-700">Test all animations and transitions</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                                <span class="text-gray-700">Validate audio quality and clarity</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                                <span class="text-gray-700">Review for accessibility compliance</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Validation Process -->
+        <section id="validation" class="mb-16">
+            <div class="bg-white rounded-2xl shadow-xl p-8 card-shadow">
+                <div class="flex items-center mb-6">
+                    <i class="fas fa-vial text-blue-600 text-2xl mr-3"></i>
+                    <h2 class="text-2xl font-bold text-gray-800">Validation Process</h2>
+                </div>
+                
+                <div class="space-y-8">
+                    <div class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-6 border border-blue-200">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-4 flex items-center">
+                            <i class="fas fa-users text-blue-600 mr-2"></i>
+                            SME Review Process
+                        </h3>
+                        <div class="grid md:grid-cols-3 gap-6">
+                            <div class="text-center">
+                                <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                                    <i class="fas fa-file-upload text-blue-600 text-xl"></i>
+                                </div>
+                                <h4 class="font-semibold text-gray-800 mb-2">Draft Delivery</h4>
+                                <p class="text-sm text-gray-600">Share storyboard draft with subject matter experts</p>
+                            </div>
+                            <div class="text-center">
+                                <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                                    <i class="fas fa-comments text-blue-600 text-xl"></i>
+                                </div>
+                                <h4 class="font-semibold text-gray-800 mb-2">Feedback Collection</h4>
+                                <p class="text-sm text-gray-600">Gather detailed feedback on accuracy and completeness</p>
+                            </div>
+                            <div class="text-center">
+                                <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                                    <i class="fas fa-check-double text-blue-600 text-xl"></i>
+                                </div>
+                                <h4 class="font-semibold text-gray-800 mb-2">Final Approval</h4>
+                                <p class="text-sm text-gray-600">Obtain sign-off before production begins</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-gradient-to-r from-green-50 to-teal-50 rounded-xl p-6 border border-green-200">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-4 flex items-center">
+                            <i class="fas fa-tasks text-green-600 mr-2"></i>
+                            Finalization Workflow
+                        </h3>
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <div class="w-8 h-8 bg-green-500 text-white rounded-full flex items-center justify-center font-bold mr-4 flex-shrink-0">1</div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-800">Incorporate SME Feedback</h4>
+                                    <p class="text-gray-600 text-sm">Apply all approved changes to storyboard and narration</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="w-8 h-8 bg-green-500 text-white rounded-full flex items-center justify-center font-bold mr-4 flex-shrink-0">2</div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-800">Quality Review</h4>
+                                    <p class="text-gray-600 text-sm">Conduct final review against learning objectives and engagement markers</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="w-8 h-8 bg-green-500 text-white rounded-full flex items-center justify-center font-bold mr-4 flex-shrink-0">3</div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-800">Production Handoff</h4>
+                                    <p class="text-gray-600 text-sm">Deliver finalized storyboard to video editor/production team with all assets</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Document Information</h3>
+                    <ul class="space-y-2 text-gray-300">
+                        <li class="flex items-center">
+                            <i class="fas fa-calendar-alt mr-2"></i>
+                            Created: December 2024
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-user-edit mr-2"></i>
+                            Author: Kannan Kasi (Technical Consultant)
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-code-branch mr-2"></i>
+                            Version: 1.0
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Next Steps</h3>
+                    <ul class="space-y-2 text-gray-300">
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle mr-2 text-green-400"></i>
+                            SME Review & Feedback
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle mr-2 text-yellow-400"></i>
+                            Final Revisions
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle mr-2 text-blue-400"></i>
+                            Production Handoff
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Contact</h3>
+                    <p class="text-gray-300 mb-4">For questions about this document, please contact the Instructional Design Team.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center hover:bg-blue-700 transition-colors">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-blue-400 rounded-full flex items-center justify-center hover:bg-blue-500 transition-colors">
+                            <i class="fas fa-phone"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>© 2024 | Microsoft 365 Copilot Instructional Design Document. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Highlight active navigation item
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('nav a');
+            
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                
+                if (pageYOffset >= (sectionTop - 100)) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('text-blue-600');
+                if (link.getAttribute('href').substring(1) === current) {
+                    link.classList.add('text-blue-600');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+
+
+    
+              <script>
+                              
+              </script>
+                        </body>
+                        </html>
+                    
